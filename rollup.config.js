@@ -7,7 +7,7 @@ import { defineConfig } from "rollup"
 
 export default defineConfig({
   input: "src/index.ts",
-  output: { dir: "dist", format: "es", sourcemap: true },
+  output: { dir: "dist", format: "es", sourcemap: false },
   plugins: [commonjs(), nodeResolve(), typescript(), terser()],
   external: ["react"],
 })
