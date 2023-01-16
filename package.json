@@ -1,0 +1,63 @@
+{
+  "name": "gigachad-react-rollup-starter",
+  "version": "0.0.0-development",
+  "description": "React Typescript Rollup Starter for building ES Modules",
+  "license": "MIT",
+  "author": "John James",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "typescript",
+    "rollup",
+    "starter",
+    "template",
+    "boilerplate",
+    "esm",
+    "module"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a11y-gigachad-org/gigachad-react-rollup-starter"
+  },
+  "scripts": {
+    "start": "rollup --config --watch",
+    "build": "rollup --config",
+    "test": "jest",
+    "prebuild": "rm -rf dist",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "latest",
+    "@commitlint/config-angular": "latest",
+    "@rollup/plugin-commonjs": "latest",
+    "@rollup/plugin-node-resolve": "latest",
+    "@rollup/plugin-terser": "latest",
+    "@rollup/plugin-typescript": "latest",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@types/jest": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "husky": "latest",
+    "jest": "latest",
+    "jest-environment-jsdom": "latest",
+    "prettier": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "rollup": "latest",
+    "ts-jest": "latest",
+    "typescript": "latest"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0"
+  }
+}
