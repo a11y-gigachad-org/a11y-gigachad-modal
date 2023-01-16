@@ -34,7 +34,6 @@ const IconCloseButton = styled.button`
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
-  outline-color: blue;
   background-color: #fff;
 `
 
