@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, ReactNode, MutableRefObject } from "react"
+import { useRef, useLayoutEffect, ReactNode } from "react"
 import styled from "styled-components"
 
 import { Portal } from "./Portal"
@@ -47,9 +47,9 @@ export type ModalProps = {
 export const Modal = (props: ModalProps): JSX.Element => {
   const { children, onClose, title, description } = props
 
-  const modalRef: MutableRefObject<HTMLDivElement | null> = useRef(null)
+  const modalRef = useRef<HTMLDivElement | null>(null)
 
-  const restoreElementRef: MutableRefObject<HTMLElement | Element | null> = useRef(null)
+  const restoreElementRef = useRef<HTMLElement | Element | null>(null)
 
   // get all by-default-focusable elements within the modal and covert them to an array of strings
   const getFocusableElements = (modal: HTMLDivElement): HTMLElement[] =>
