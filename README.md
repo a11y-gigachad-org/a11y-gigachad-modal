@@ -1,6 +1,6 @@
 # ⚛️ React Typescript Accessible Modal
 
-Bare bones React Modal aka Overlay aka Dialog component that adhers to W3C WAI accessiblity standards.
+Bare bones React Typescript Modal aka Overlay aka Dialog component that adhers to W3C WAI accessiblity standards.
 
 ## ⚙️ Install
 
