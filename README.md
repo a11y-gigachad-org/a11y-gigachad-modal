@@ -21,5 +21,3 @@ For any ideas or questions, head over to the [disscussions](https://github.com/a
 ## 🐛 Bugs
 
 For any bugs, missing documentation, or unexpected behavior head over to the [issues](https://github.com/a11y-gigachad-org/a11y-gigachad-modal/issues) to file them there.
-
-## Example
