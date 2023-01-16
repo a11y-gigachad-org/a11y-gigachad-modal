@@ -9,7 +9,6 @@ export const Dummy = (props: DummyProps) => {
   return (
     <section>
       <h1>{title}</h1>
-
       {children}
     </section>
   )
