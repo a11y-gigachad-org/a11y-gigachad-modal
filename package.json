@@ -32,7 +32,8 @@
     "build": "rollup --config",
     "test": "jest",
     "prebuild": "rm -rf dist",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
@@ -62,7 +63,8 @@
     "rollup": "latest",
     "styled-components": "latest",
     "ts-jest": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "semantic-release": "^20.0.2"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
