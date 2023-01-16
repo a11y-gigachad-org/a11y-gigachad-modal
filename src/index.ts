@@ -1,1 +1,1 @@
-export { Dummy, type DummyProps } from "./Dummy"
+export { Portal, type PortalProps } from "./Portal"
