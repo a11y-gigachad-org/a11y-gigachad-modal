@@ -98,3 +98,63 @@ it("root app element should have aria-hidden set to true", () => {
 
   expect(screen.getByTestId("root")).toHaveAttribute("aria-hidden", "true")
 })
+
+it("document body should have `overflow: hidden` - not scrollable", () => {
+  render(
+    <Modal onClose={onClose} title="Title" description="Description">
+      test
+    </Modal>
+  )
+
+  expect(document.body).toHaveStyle("overflow: hidden")
+})
+
+it("focus should be trapped in a loop when `Tab` key is continiously pressed", () => {
+  render(
+    <Modal onClose={onClose} title="Title" description="Description">
+      <button onClick={onClose}>Close</button>
+    </Modal>
+  )
+
+  expect(screen.getByText("X")).toHaveFocus()
+
+  fireEvent.keyDown(screen.getByRole("dialog"), { key: "Tab" })
+
+  expect(screen.getByText("Close")).toHaveFocus()
+
+  fireEvent.keyDown(screen.getByRole("dialog"), { key: "Tab" })
+
+  expect(screen.getByText("X")).toHaveFocus()
+})
+
+it("should not focus a disabled element and it should be ignored and skipped by `Tab` key", () => {
+  render(
+    <Modal onClose={onClose} title="Title" description="Description">
+      <button disabled>Disabled close</button>
+      <button>Enabled close</button>
+    </Modal>
+  )
+
+  expect(screen.getByText("X")).toHaveFocus()
+
+  fireEvent.keyDown(screen.getByRole("dialog"), { key: "Tab" })
+
+  expect(screen.getByText("Disabled close")).not.toHaveFocus()
+  expect(screen.getByText("Enabled close")).toHaveFocus()
+})
+
+it("should not focus a `tabIndex={-1}` element and it should be ignored and skipped by `Tab` key", () => {
+  render(
+    <Modal onClose={onClose} title="Title" description="Description">
+      <button tabIndex={-1}>Tab Index 0</button>
+      <button>Close</button>
+    </Modal>
+  )
+
+  expect(screen.getByText("X")).toHaveFocus()
+
+  fireEvent.keyDown(screen.getByRole("dialog"), { key: "Tab" })
+
+  expect(screen.getByText("Tab Index 0")).not.toHaveFocus()
+  expect(screen.getByText("Close")).toHaveFocus()
+})
