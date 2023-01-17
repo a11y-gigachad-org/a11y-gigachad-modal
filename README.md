@@ -14,7 +14,7 @@ npm i a11y-gigachad-modal --save-dev
 import { Modal, type ModalProps } from 'a11y-gigachad-modal'
 ```
 
-## Example
+## 👀 Example
 
 https://codesandbox.io/s/a11y-gigachad-modal-ybi4d1
 
