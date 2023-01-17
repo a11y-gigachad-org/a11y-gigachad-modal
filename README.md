@@ -1,6 +1,6 @@
 # ⚛️ React Typescript Accessible Modal
 
-Bare bones React Typescript Modal aka Overlay aka Dialog component that adhers to [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) and [WAI-ARIA](https://www.w3.org/WAI/ARIA/apg/) specifications for accessibility including color contrast for low-vision users, and accessible labels, keyboard navigation, and focus state management for keyboard-only users.
+Bare bones React Typescript Modal Dialog component that adhers to [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) and [WAI-ARIA](https://www.w3.org/WAI/ARIA/apg/) specifications for accessibility including color contrast for low-vision users, and accessible labels, keyboard navigation, and focus state management for keyboard-only users.
 
 ## ⚙️ Install
 
