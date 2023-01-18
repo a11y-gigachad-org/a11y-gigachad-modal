@@ -52,6 +52,7 @@
     "@typescript-eslint/parser": "latest",
     "eslint": "latest",
     "eslint-config-prettier": "latest",
+    "eslint-plugin-jsx-a11y": "latest",
     "husky": "latest",
     "jest": "latest",
     "jest-axe": "latest",
