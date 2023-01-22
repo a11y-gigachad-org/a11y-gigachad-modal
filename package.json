@@ -1,7 +1,7 @@
 {
   "name": "a11y-gigachad-modal",
   "version": "0.0.0-development",
-  "description": "Accessible Modal Overlay Dialog",
+  "description": "Accessible React Modal Overlay Dialog",
   "license": "MIT",
   "author": "John James",
   "type": "module",
