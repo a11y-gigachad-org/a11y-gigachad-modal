@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { axe } from "jest-axe"
 
-import { Portal } from "./Portal"
+import { Portal } from "./"
 
 it("should have no a11y violations", async () => {
   const { baseElement } = render(
