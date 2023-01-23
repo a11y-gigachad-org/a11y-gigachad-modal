@@ -13,7 +13,7 @@ const Portal = (props: PortalProps): JSX.Element => {
   container.style.position = "relative"
   /** portaled content should get their own stacking context so they don't interfere */
   /** with each other in unexpected ways. one should never find themselves tempted */
-  /** to change the zIndex to a value other than "1". */
+  /** to change the zIndex to a value other than "1" */
   container.style.zIndex = "1"
 
   const containerRef = useRef(container)
