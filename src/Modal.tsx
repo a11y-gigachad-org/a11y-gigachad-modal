@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, ReactNode } from "react"
 import styled from "styled-components"
 
-import { Portal } from "./Portal"
+import { Portal } from "./"
 
 const ModalContainer = styled.div`
   display: grid;
@@ -44,14 +44,14 @@ export type ModalProps = {
   onClose: () => void
 }
 
-export const Modal = (props: ModalProps): JSX.Element => {
+const Modal = (props: ModalProps): JSX.Element => {
   const { children, onClose, title, description } = props
 
-  const modalRef = useRef<HTMLDivElement | null>(null)
+  const modal = useRef<HTMLDivElement | null>(null)
 
-  const restoreElementRef = useRef<HTMLElement | Element | null>(null)
+  const restoreFocus = useRef<unknown | null>(null)
 
-  // credit for the list: https://stackoverflow.com/a/1600194
+  /** credit for the list: https://stackoverflow.com/a/1600194 */
   type FocusableHTMLElement = HTMLAnchorElement &
     HTMLAreaElement &
     HTMLButtonElement &
@@ -59,12 +59,12 @@ export const Modal = (props: ModalProps): JSX.Element => {
     HTMLSelectElement &
     HTMLTextAreaElement
 
-  // get all natively focusable elements within the modal and convert them to an array of strings
+  /** get all natively focusable elements within the modal and convert them to an array of strings */
   const getFocusableElements = (modal: HTMLDivElement): FocusableHTMLElement[] =>
     Array.from(
       modal.querySelectorAll(
         [
-          // `disabled` elements can't be filtered out by using `:not([disabled])` so we have to do it via javascript later
+          /** `disabled` elements can't be filtered out by using `:not([disabled])` so we have to do it via javascript later */
           "a[href]:not([tabindex='-1'])",
           "area[href]:not([tabindex='-1'])",
           "button:not([tabindex='-1'])",
@@ -75,15 +75,15 @@ export const Modal = (props: ModalProps): JSX.Element => {
       )
     )
 
-  // filter out all `disabled` elements
+  /** filter out all `disabled` elements */
   const getEnabledElements = (elements: FocusableHTMLElement[]): FocusableHTMLElement[] =>
     elements.filter((element) => !element.disabled)
 
   const getSortedByTabIndex = (elements: FocusableHTMLElement[]): FocusableHTMLElement[] =>
     elements.sort(
-      // we want to move `tabIndex={0}` to the end of the array. this is what the browser does, as well
-      // so the order of focusing should be tabIndex 1 2 3 4 and only then 0
-      // natively focusable elements like `button` have implicit tabIndex of 0
+      /** we want to move `tabIndex={0}` to the end of the array. this is what the browser does, as well */
+      /** so the order of focusing should be tabIndex 1 2 3 4 and only then 0 */
+      /** natively focusable elements like `button` have implicit tabIndex of 0 */
       (a, b) =>
         Math.sign((a.tabIndex || Number.MAX_SAFE_INTEGER) - (b.tabIndex || Number.MAX_SAFE_INTEGER))
     )
@@ -94,14 +94,14 @@ export const Modal = (props: ModalProps): JSX.Element => {
     let nextIndex = 0
 
     if (forward) {
-      // when tab is pressed, we check if the currently focused element is the last
-      // if no, increase `currentIndex` by 1, which focuses the next element
-      // if yes, focus the first element
+      /** when tab is pressed, we check if the currently focused element is the last */
+      /** if no, increase `currentIndex` by 1, which focuses the next element */
+      /** if yes, focus the first element */
       nextIndex = currentIndex < elements.length - 1 ? currentIndex + 1 : 0
     } else {
-      // when shift + tab is pressed, check if currently focused element is the first
-      // if no, decrease `currentIndex` by 1, which focuses the previous element
-      // if yes, focus the last element
+      /** when shift + tab is pressed, check if currently focused element is the first */
+      /** if no, decrease `currentIndex` by 1, which focuses the previous element */
+      /** if yes, focus the last element */
       nextIndex = currentIndex > 0 ? currentIndex - 1 : elements.length - 1
     }
 
@@ -116,18 +116,18 @@ export const Modal = (props: ModalProps): JSX.Element => {
           break
 
         case "Tab":
-          // prevents `Tab` default behavior that would otherwise ignore the focus trap
+          /** prevents `Tab` default behavior that would otherwise ignore the focus trap */
           event.preventDefault()
 
-          // event.shiftKey will be true if shift + tab is pressed
-          if (modalRef.current) {
-            // first get all focusable elements
-            const focusableElements = getFocusableElements(modalRef.current)
-            // filter out all disabled elements
+          /** event.shiftKey will be true if shift + tab is pressed */
+          if (modal.current) {
+            /** first get all focusable elements */
+            const focusableElements = getFocusableElements(modal.current)
+            /** filter out all disabled elements */
             const enabledElements = getEnabledElements(focusableElements)
-            // then sort them
+            /** then sort them */
             const sortedElements = getSortedByTabIndex(enabledElements)
-            // then use them to set next focus
+            /** then use them to set next focus */
             setFocus(sortedElements, !event.shiftKey)
           }
           break
@@ -145,19 +145,19 @@ export const Modal = (props: ModalProps): JSX.Element => {
   }, [onClose])
 
   useLayoutEffect(() => {
-    // prevent content behind the modal from scrolling
+    /** prevent content behind the modal from scrolling */
     document.body.style.overflow = "hidden"
-    // makes the root element hidden from assistive technology while the modal is opened
+    /** makes the root element hidden from assistive technology while the modal is opened */
     document.getElementById("root")?.setAttribute("aria-hidden", "true")
 
-    // just before a focusable element within the modal is focused, we store a reference to the
-    // element that was focused just before the modal opened. that way we can restore the focus
-    // to that element when the modal closes again
-    restoreElementRef.current = document.activeElement
+    /** just before a focusable element within the modal is focused, we store a reference to the */
+    /** element that was focused just before the modal opened. that way we can restore the focus */
+    /** to that element when the modal closes again */
+    restoreFocus.current = document.activeElement
 
-    // focus a focusable element when the modal opens
-    if (modalRef.current) {
-      const focusableElements = getFocusableElements(modalRef.current)
+    /** focus a focusable element when the modal opens */
+    if (modal.current) {
+      const focusableElements = getFocusableElements(modal.current)
 
       const enabledElements = getEnabledElements(focusableElements)
 
@@ -167,14 +167,14 @@ export const Modal = (props: ModalProps): JSX.Element => {
     }
 
     return () => {
-      // resets to the its inherited or initial value
+      /** resets to the its inherited or initial value */
       document.body.style.overflow = "unset"
 
       document.getElementById("root")?.removeAttribute("aria-hidden")
 
-      // restore focus to the element that was focused just before the modal opened
-      if (restoreElementRef.current instanceof HTMLElement) {
-        restoreElementRef.current.focus()
+      /** restore focus to the element that was focused just before the modal opened */
+      if (restoreFocus.current instanceof HTMLElement) {
+        restoreFocus.current.focus()
       }
     }
   }, [])
@@ -187,7 +187,7 @@ export const Modal = (props: ModalProps): JSX.Element => {
         aria-describedby="description"
         aria-modal="true"
         aria-hidden="false"
-        ref={modalRef}
+        ref={modal}
       >
         <ModalBody>
           <h2 id="title">{title}</h2>
@@ -204,3 +204,5 @@ export const Modal = (props: ModalProps): JSX.Element => {
     </Portal>
   )
 }
+
+export default Modal
