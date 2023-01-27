@@ -1,41 +1,7 @@
 import { useRef, useLayoutEffect, ReactNode } from "react"
-import styled from "styled-components"
 
 import { Portal } from "./"
-
-const ModalContainer = styled.div`
-  display: grid;
-  place-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-`
-
-const ModalBody = styled.div`
-  position: relative;
-  width: 85vw;
-  background-color: #fff;
-  color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-
-  @media screen and (min-width: 48rem) {
-    width: 40vw;
-  }
-`
-
-const IconCloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  background-color: #fff;
-`
+import * as S from "./styles"
 
 export type ModalProps = {
   children: ReactNode
@@ -181,7 +147,7 @@ const Modal = (props: ModalProps): JSX.Element => {
 
   return (
     <Portal>
-      <ModalContainer
+      <S.ModalContainer
         role="dialog"
         aria-labelledby="title"
         aria-describedby="description"
@@ -189,18 +155,18 @@ const Modal = (props: ModalProps): JSX.Element => {
         aria-hidden="false"
         ref={modal}
       >
-        <ModalBody>
+        <S.ModalBody>
           <h2 id="title">{title}</h2>
 
-          <IconCloseButton type="button" onClick={onClose} aria-label="Close dialog">
+          <S.IconCloseButton type="button" onClick={onClose} aria-label="Close dialog">
             X
-          </IconCloseButton>
+          </S.IconCloseButton>
 
           <p id="description">{description}</p>
 
           {children}
-        </ModalBody>
-      </ModalContainer>
+        </S.ModalBody>
+      </S.ModalContainer>
     </Portal>
   )
 }
