@@ -20,7 +20,7 @@ afterAll(() => {
   document.body.removeChild(root)
 })
 
-it("should have no a11y violations", async () => {
+test("should have no a11y violations", async () => {
   const { baseElement } = render(
     <Modal onClose={onClose} title="Title" description="Description">
       <button type="button" onClick={onClose}>
@@ -34,7 +34,7 @@ it("should have no a11y violations", async () => {
   expect(results).toHaveNoViolations()
 })
 
-it("should call onClose when escape or close buttons are pressed", async () => {
+test("should call onClose when escape or close buttons are pressed", async () => {
   const user = userEvent.setup()
 
   render(
@@ -55,7 +55,7 @@ it("should call onClose when escape or close buttons are pressed", async () => {
   expect(onClose).toHaveBeenCalledTimes(3)
 })
 
-it("modal should have aria roles", () => {
+test("modal should have aria roles", () => {
   render(
     <Modal onClose={onClose} title="Title" description="Description">
       test
@@ -70,7 +70,7 @@ it("modal should have aria roles", () => {
   expect(screen.getByRole("dialog")).toHaveAttribute("aria-modal", "true")
 })
 
-it("should render 3 children", () => {
+test("should render 3 children", () => {
   render(
     <Modal onClose={onClose} title="Title" description="Description">
       <p>test</p>
@@ -82,7 +82,7 @@ it("should render 3 children", () => {
   expect(screen.getAllByText("test")).toHaveLength(3)
 })
 
-it("close button x icon should have aria-label", () => {
+test("close button x icon should have aria-label", () => {
   render(
     <Modal onClose={onClose} title="Title" description="Description">
       test
@@ -92,7 +92,7 @@ it("close button x icon should have aria-label", () => {
   expect(screen.getByText("X")).toHaveAccessibleName()
 })
 
-it("root app element should have aria-hidden set to true", () => {
+test("root app element should have aria-hidden set to true", () => {
   render(
     <Modal onClose={onClose} title="Title" description="Description">
       test
@@ -102,7 +102,7 @@ it("root app element should have aria-hidden set to true", () => {
   expect(screen.getByTestId("root")).toHaveAttribute("aria-hidden", "true")
 })
 
-it("document body should have `overflow: hidden` - not scrollable", () => {
+test("document body should have `overflow: hidden` - not scrollable", () => {
   render(
     <Modal onClose={onClose} title="Title" description="Description">
       test
@@ -112,7 +112,7 @@ it("document body should have `overflow: hidden` - not scrollable", () => {
   expect(document.body).toHaveStyle("overflow: hidden")
 })
 
-it("focus should be trapped in a loop when `Tab` key is continiously pressed", async () => {
+test("focus should be trapped in a loop when `Tab` key is continiously pressed", async () => {
   const user = userEvent.setup()
 
   render(
@@ -132,7 +132,7 @@ it("focus should be trapped in a loop when `Tab` key is continiously pressed", a
   expect(screen.getByText("X")).toHaveFocus()
 })
 
-it("should not focus a disabled element and it should be ignored and skipped by `Tab` key", async () => {
+test("should not focus a disabled element and test should be ignored and skipped by `Tab` key", async () => {
   const user = userEvent.setup()
 
   render(
@@ -150,7 +150,7 @@ it("should not focus a disabled element and it should be ignored and skipped by 
   expect(screen.getByText("Enabled close")).toHaveFocus()
 })
 
-it("should not focus a `tabIndex={-1}` element and it should be ignored and skipped by `Tab` key", async () => {
+test("should not focus a `tabIndex={-1}` element and test should be ignored and skipped by `Tab` key", async () => {
   const user = userEvent.setup()
 
   render(

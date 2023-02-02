@@ -3,7 +3,7 @@ import { axe } from "jest-axe"
 
 import { Portal } from "./"
 
-it("should have no a11y violations", async () => {
+test("should have no a11y violations", async () => {
   const { baseElement } = render(
     <Portal>
       <button>test</button>
